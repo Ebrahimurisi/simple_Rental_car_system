@@ -1,0 +1,81 @@
+:root{
+  --blue-900:#04345A;   /* رئيسي داكن */
+  --blue-700:#0A4374;   /* نصوص غامقة */
+  --blue-500:#2A76B8;   /* أزرار/روابط */
+  --blue-300:#5FB2E2;   /* قسم المركبات */
+  --white:#FFFFFF;
+  --gray-50:#F4F7FA;
+  --gray-700:#333333;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  direction:rtl;
+  font-family:'Cairo', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color:var(--gray-700);
+  background:var(--gray-50);
+  scroll-behavior:smooth;
+}
+img{max-width:100%;display:block}
+.container{width:min(1200px,92%);margin-inline:auto}
+
+/* Navbar */
+.navbar{position:sticky;top:0;z-index:1000;background:var(--gray-50);border-bottom:1px solid rgba(0,0,0,.06)}
+.navbar .row{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.nav-links{list-style:none;display:flex;gap:28px;margin:0;padding:0}
+.nav-links a{color:var(--blue-700);text-decoration:none;font-weight:700;position:relative;padding-bottom:4px}
+.nav-links a::after{content:"";position:absolute;inset:auto 0 -6px 0;height:2px;background:transparent;transition:.25s}
+.nav-links a:hover::after{background:var(--blue-500)}
+.btn-login{background:var(--blue-700);color:var(--white);padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:800;box-shadow:var(--shadow)}
+.btn-login:hover{filter:brightness(1.05)}
+
+/* Hero (مشترك، نخصصه أكثر في index.css إن رغبت) */
+.hero{background:linear-gradient(180deg,var(--blue-900),#063d69);color:var(--white)}
+.hero .wrap{text-align:center;padding:80px 0 72px;width:min(900px,92%);margin:auto}
+.hero .hero-img{width:clamp(220px,28vw,420px);margin:0 auto 12px;filter:drop-shadow(0 18px 28px rgba(0,0,0,.35))}
+.hero h1{font-size:clamp(28px,4.2vw,48px);margin:10px 0 12px;font-weight:800}
+.hero p{font-size:clamp(16px,2vw,20px);opacity:.92;margin:0 auto 22px;max-width:800px}
+.btn-primary{display:inline-block;background:var(--blue-300);color:#0c2f4f;padding:12px 26px;border-radius:999px;text-decoration:none;font-weight:800;transition:.25s;box-shadow:var(--shadow)}
+.btn-primary:hover{transform:translateY(-2px);background:var(--white);color:var(--blue-700)}
+
+/* Sections */
+.section{padding:60px 0}
+.section-title{text-align:center;color:var(--blue-700);font-size:clamp(22px,3vw,34px);margin:0 0 8px}
+.lead{text-align:center;color:#18415f;margin-bottom:28px}
+
+/* Cards grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.card{background:var(--white);border-radius:14px;padding:16px;box-shadow:var(--shadow);transform:translateY(10px);opacity:0;transition:.5s ease}
+.card.is-visible{transform:none;opacity:1}
+.card img{height:160px;object-fit:cover;border-radius:10px;background:#eef4f8;margin-bottom:10px}
+.card h3{margin:0 0 6px;color:var(--blue-700);font-size:20px}
+.card p{margin:0;color:#536372}
+
+/* Testimonials */
+.testimonials{background:var(--gray-50)}
+.testimonial{background:var(--white);border-radius:14px;padding:16px;box-shadow:var(--shadow);transform:translateY(14px);opacity:0;transition:.55s ease}
+.testimonial.is-visible{transform:none;opacity:1}
+.author{display:flex;align-items:center;gap:10px}
+.author img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+
+/* Forms */
+.form{max-width:640px;margin:0 auto}
+.input{width:100%;padding:12px 14px;border:1px solid #d7dee7;border-radius:10px;background:#fff;font:inherit}
+.input:focus{outline:none;border-color:var(--blue-500);box-shadow:0 0 0 3px rgba(42,118,184,.12)}
+.row-gap{display:grid;gap:16px}
+.btn{display:inline-block;background:var(--blue-700);color:#fff;padding:12px 20px;border-radius:10px;border:none;cursor:pointer;font-weight:800}
+.btn:hover{filter:brightness(1.08)}
+
+/* Footer */
+.footer{background:var(--blue-900);color:#fff;text-align:center;padding:18px 0}
+
+/* Animations */
+.fade-up{opacity:0;transform:translateY(14px)}
+.fade-up.is-visible{opacity:1;transform:none;transition:.7s ease}
+.animate-in{opacity:0;transform:translateY(-6px);animation:navFade .6s ease forwards}
+@keyframes navFade{to{opacity:1;transform:none}}
+
+/* Helpers */
+.bg-vehicles{background:var(--blue-300)}
+.mt-20{margin-top:20px}

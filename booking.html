@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>الحجوزات – معرض أبو حيد العولقي</title>
+
+  <!-- خط -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- التنسيقات المشتركة + تنسيقات الصفحات -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/pages.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container row">
+      <ul class="nav-links">
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="vehicles.html">المركبات</a></li>
+        <li><a href="booking.html">الحجوزات</a></li>
+        <li><a href="contact.html">تواصل معنا</a></li>
+      </ul>
+      <a class="btn-login" href="login.html">تسجيل دخول</a>
+    </div>
+  </header>
+
+  <!-- Booking -->
+  <section class="section booking">
+    <div class="container">
+      <h1 class="section-title fade-up">نموذج الحجز</h1>
+      <p class="lead fade-up">أكمل بياناتك لتأكيد الحجز. (السعر والصورة تتحدث تلقائيًا عند اختيار المركبة)</p>
+
+      <form id="bookingForm" class="form card-ux form-wide" novalidate>
+        <!-- المركبة -->
+        <div class="field">
+          <label class="lbl">المركبة</label>
+          <div class="input-wrap">
+            <select id="car" name="car" class="input has-icon" required>
+              <option value="" disabled selected>اختر المركبة</option>
+              <!-- لاحظ data-img توافق صورك الحالية -->
+              <option value="Hilux 2017" data-price="200" data-img="2.jpg">Hilux 2017</option>
+              <option value="Hilux 2020" data-price="250" data-img="3.png">Hilux 2020</option>
+              <option value="Hilux 2022" data-price="300" data-img="3.png">Hilux 2022</option>
+            </select>
+            <span class="icon">🚘</span>
+          </div>
+          <small class="hint">اختر المركبة المطلوبة</small>
+        </div>
+
+        <!-- السعر -->
+        <div class="field">
+          <label class="lbl">السعر (بالدولار)</label>
+          <div class="input-wrap">
+            <input id="price" name="price" class="input has-icon" type="number" inputmode="numeric" placeholder="مثال: 250" required />
+            <span class="icon">$</span>
+          </div>
+          <small class="hint">يتعبأ تلقائيًا بعد اختيار المركبة ويمكن تعديله</small>
+        </div>
+
+        <!-- الاسم -->
+        <div class="field">
+          <label class="lbl">الاسم الكامل</label>
+          <div class="input-wrap">
+            <input id="fullname" name="name" class="input has-icon" placeholder="اسمك" required />
+            <span class="icon">👤</span>
+          </div>
+        </div>
+
+        <!-- الهاتف -->
+        <div class="field">
+          <label class="lbl">رقم الهاتف</label>
+          <div class="input-wrap">
+            <input
+              id="phone" name="phone" class="input has-icon" type="tel"
+              placeholder="77xxxxxxx"
+              pattern="^(?:\+?967)?0?7\d{8}$"
+              required />
+            <span class="icon">📱</span>
+          </div>
+          <small class="hint">يدعم: 7xxxxxxxx أو 07xxxxxxxx أو +9677xxxxxxxx</small>
+        </div>
+
+        <!-- من / إلى -->
+        <div class="field">
+          <label class="lbl">من / إلى</label>
+          <div class="input-wrap">
+            <input id="route" name="route" class="input has-icon" placeholder="من صنعاء إلى إب" required />
+            <span class="icon">📍</span>
+          </div>
+        </div>
+
+        <!-- التاريخ وعدد الركاب -->
+        <div class="row-2">
+          <div class="field">
+            <label class="lbl">تاريخ الرحلة</label>
+            <div class="input-wrap">
+              <input id="date" name="date" class="input has-icon" type="date" required />
+              <span class="icon">📅</span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="lbl">عدد الركاب</label>
+            <div class="input-wrap">
+              <input id="passengers" name="passengers" class="input has-icon" type="number" min="1" max="7" value="4" required />
+              <span class="icon">👥</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- زر -->
+        <button class="btn submit-btn" type="submit">تأكيد الحجز</button>
+
+        <!-- رسائل -->
+        <div id="formMsg" class="form-msg" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container"><p>© 2024 معرض أبو حيد العولقي</p></div>
+  </footer>
+
+  <!-- ===== Modal: ملخص الحجز ===== -->
+  <div class="modal" id="confirmModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" aria-label="إغلاق" data-close>×</button>
+
+      <div class="modal-hero">
+        <!-- صورة الملخّص (تتحدث تلقائيًا) -->
+        <img id="mImg" src="./assets/img/2.jpg" alt="صورة المركبة"
+             onerror="this.onerror=null; this.src='assets/img/placeholder.png'">
+      </div>
+
+      <div class="modal-body">
+        <h3 id="modalTitle">ملخص الحجز</h3>
+
+        <div class="modal-grid">
+          <div><span>المركبة:</span> <strong id="mCar">-</strong></div>
+          <div><span>السعر:</span> <strong><span id="mPrice">-</span>$</strong></div>
+          <div><span>العميل:</span> <strong id="mName">-</strong></div>
+          <div><span>الهاتف:</span> <strong id="mPhone">-</strong></div>
+          <div class="full"><span>المسار:</span> <strong id="mRoute">-</strong></div>
+          <div><span>التاريخ:</span> <strong id="mDate">-</strong></div>
+          <div><span>عدد الركاب:</span> <strong id="mPassengers">-</strong></div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn" id="mPrint">طباعة الملخص</button>
+          <button class="btn btn-outline" data-close>إغلاق</button>
+        </div>
+
+        <p class="modal-note">سيتم التواصل معكم خلال ساعات العمل لتأكيد الحجز نهائيًا. شكرًا لاختياركم معرض أبو حيد العولقي.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- سكربتات -->
+  <script src="assets/js/main.js"></script>
+  <script>
+    // عناصر النموذج
+    const carSel = document.getElementById('car');
+    const priceInp = document.getElementById('price');
+    const nameInp = document.getElementById('fullname');
+    const phoneInp = document.getElementById('phone');
+    const routeInp = document.getElementById('route');
+    const dateInp = document.getElementById('date');
+    const passInp = document.getElementById('passengers');
+    const formMsg = document.getElementById('formMsg');
+    const modalImg = document.getElementById('mImg');
+
+    // حدّ أدنى للتاريخ
+    dateInp.min = new Date().toISOString().split('T')[0];
+
+    // خريطة احتياطية بين الاسم والصورة (لو ما كان في data-img)
+    const carImageMap = {
+      'Hilux 2017': '2.jpg',
+      'Hilux 2020': '3.png',
+      'Hilux 2022': '3.png'
+    };
+
+    // تحديث صورة الملخص من الـ option + fallback
+    function setCarImageFromOption(opt){
+      let filename = opt?.dataset?.img || carImageMap[opt?.value];
+      modalImg.src = filename ? `assets/img/${filename}` : `assets/img/placeholder.png`;
+    }
+
+    // عند تغيير المركبة: حدّث السعر والصورة
+    function updateFromSelect(){
+      const opt = carSel.selectedOptions[0];
+      if (!opt) return;
+      if (opt.dataset.price) priceInp.value = opt.dataset.price;
+      setCarImageFromOption(opt);
+    }
+    carSel.addEventListener('change', updateFromSelect);
+
+    // قراءة قيم من الرابط (vehicles -> booking)
+    const url = new URLSearchParams(location.search);
+    const urlCar = url.get('car');
+    const urlPrice = url.get('price');
+
+    if (urlCar) {
+      const match = [...carSel.options].find(o => o.value === urlCar);
+      if (match) {
+        carSel.value = urlCar;
+        setCarImageFromOption(match);
+        if (!urlPrice && match.dataset.price) priceInp.value = match.dataset.price;
+      }
+    }
+    if (urlPrice) priceInp.value = urlPrice;
+
+    // تحويل الأرقام العربية/الهندية إلى إنجليزية
+    function normalizeDigits(str){
+      const ar = '٠١٢٣٤٥٦٧٨٩', inD = '۰۱۲۳۴۵۶۷۸۹';
+      return String(str)
+        .replace(/[٠-٩]/g, d => ar.indexOf(d))
+        .replace(/[۰-۹]/g, d => inD.indexOf(d));
+    }
+    // تحقق مرن لأرقام اليمن
+    function isValidYemenMobile(raw){
+      const s = normalizeDigits(raw).replace(/\s|-/g,'');
+      return /^(?:\+?967)?0?7\d{8}$/.test(s);
+    }
+
+    // منطق المودال
+    const modal = document.getElementById('confirmModal');
+    function openModal(){ modal.setAttribute('aria-hidden','false'); modal.classList.add('show'); document.body.style.overflow='hidden'; }
+    function closeModal(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    modal.addEventListener('click', (e)=> { if (e.target.hasAttribute('data-close')) closeModal(); });
+    document.addEventListener('keydown', (e)=> { if (e.key === 'Escape') closeModal(); });
+
+    // إرسال النموذج -> عرض ملخّص مع صورة صحيحة
+    document.getElementById('bookingForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      formMsg.textContent = '';
+
+      if (!carSel.value) return showMsg('يرجى اختيار المركبة', 'err');
+      if (!priceInp.value || Number(priceInp.value) <= 0) return showMsg('تحقق من السعر', 'err');
+      if (!isValidYemenMobile(phoneInp.value)) return showMsg('رقم الهاتف غير صحيح', 'err');
+
+      const opt = carSel.selectedOptions[0];
+      setCarImageFromOption(opt);
+
+      // تعبئة بيانات المودال
+      document.getElementById('mCar').textContent = carSel.value;
+      document.getElementById('mPrice').textContent = priceInp.value || '-';
+      document.getElementById('mName').textContent = nameInp.value.trim() || '-';
+      document.getElementById('mPhone').textContent = normalizeDigits(phoneInp.value.trim()) || '-';
+      document.getElementById('mRoute').textContent = routeInp.value.trim() || '-';
+      document.getElementById('mDate').textContent = dateInp.value || '-';
+      document.getElementById('mPassengers').textContent = passInp.value || '-';
+
+      openModal();
+    });
+
+    function showMsg(txt, type){
+      formMsg.textContent = txt;
+      formMsg.className = 'form-msg ' + (type==='ok' ? 'ok' : 'err');
+    }
+
+    // طباعة الملخص
+    document.getElementById('mPrint').addEventListener('click', () => window.print());
+
+    // تحديث مبدئي إن لم يأتِ من رابط
+    if (!urlCar) updateFromSelect();
+  </script>
+</body>
+</html>

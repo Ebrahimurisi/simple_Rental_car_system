@@ -1,0 +1,140 @@
+/* ===== لوحة ألوان (أزرق احترافي) ===== */
+:root{
+  --blue-900:#04345A;   /* خلفية الهيرو/الفوتر */
+  --blue-700:#0A4374;   /* نصوص على الخلفيات الفاتحة */
+  --blue-500:#2A76B8;   /* أزرار ثانوية */
+  --blue-300:#5FB2E2;   /* خلفية قسم المركبات */
+  --white:#FFFFFF;
+  --gray-50:#F4F7FA;    /* خلفية عامة فاتحة */
+  --gray-700:#333333;   /* نص أساسي */
+  --shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+/* ===== أساسيات ===== */
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:'Cairo', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color:var(--gray-700);
+  background:var(--gray-50);
+  scroll-behavior:smooth;
+}
+img{max-width:100%;display:block}
+
+/* ===== حاوية قياسية ===== */
+.container{width:min(1200px, 92%); margin-inline:auto}
+
+/* ===== Navbar ===== */
+.navbar{
+  position:sticky; top:0; z-index:1000;
+  background:var(--gray-50);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.navbar .container{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 0;
+}
+.nav-links{list-style:none; display:flex; gap:28px; padding:0; margin:0}
+.nav-links a{
+  color:var(--blue-700); text-decoration:none; font-weight:700;
+  position:relative; padding-bottom:4px;
+}
+.nav-links a::after{
+  content:""; position:absolute; inset:auto 0 -6px 0; height:2px;
+  background:transparent; transition:.25s;
+}
+.nav-links a:hover::after{ background:var(--blue-500) }
+
+.btn-login{
+  background:var(--blue-700); color:var(--white);
+  padding:10px 18px; border-radius:999px; text-decoration:none; font-weight:700;
+  box-shadow:var(--shadow);
+}
+.btn-login:hover{ filter:brightness(1.05) }
+
+/* ===== Hero ===== */
+.hero{
+  background:linear-gradient(180deg, var(--blue-900) 0%, #063d69 100%);
+  color:var(--white);
+}
+.hero-content{
+  text-align:center; padding:80px 0 72px;
+  width:min(900px, 92%); margin:auto;
+}
+.hero-img{
+  width:clamp(220px, 28vw, 420px);  /* يكبر على الشاشات الكبيرة */
+  margin-inline:auto 18px;
+  filter: drop-shadow(0 18px 28px rgba(0,0,0,.35));
+  margin-bottom:10px;
+}
+.hero h1{ font-size:clamp(28px, 4.2vw, 48px); margin:10px 0 12px; font-weight:800 }
+.hero p{ font-size:clamp(16px, 2vw, 20px); opacity:.92; margin:0 auto 22px; max-width:800px }
+.btn-primary{
+  display:inline-block; background:var(--blue-300); color:#0c2f4f;
+  padding:12px 26px; border-radius:999px; text-decoration:none; font-weight:800;
+  transition:transform .25s, background .25s, color .25s;
+  box-shadow:var(--shadow);
+}
+.btn-primary:hover{ transform:translateY(-2px); background:var(--white); color:var(--blue-700) }
+
+/* ===== Vehicles ===== */
+.vehicles{ background:var(--blue-300); padding:60px 0 }
+.vehicles h2{
+  text-align:center; color:#0c2f4f; font-size:clamp(22px, 3vw, 34px); margin:0 0 8px
+}
+.lead{text-align:center; color:#18415f; margin-bottom:28px}
+.vehicle-cards{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+  gap:22px; align-items:stretch;
+}
+.card{
+  background:var(--white); border-radius:14px; padding:16px;
+  box-shadow:var(--shadow); transform:translateY(10px); opacity:0;
+  transition:transform .5s ease, opacity .5s ease;
+}
+.card.is-visible{ transform:none; opacity:1 }
+.card img{
+  height:160px; object-fit:cover; border-radius:10px; margin-bottom:10px; background:#eef4f8
+}
+.card h3{ margin:0 0 6px; color:var(--blue-700); font-size:20px }
+.card p{ margin:0; color:#536372 }
+
+/* ===== Testimonials ===== */
+.testimonials{ background:var(--gray-50); padding:60px 0 }
+.testimonials h2{
+  text-align:center; color:var(--blue-700); font-size:clamp(22px,3vw,34px); margin-bottom:22px
+}
+.testimonial-cards{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+  gap:22px;
+}
+.testimonial{
+  background:var(--white); border-radius:14px; padding:16px; box-shadow:var(--shadow);
+  transform:translateY(14px); opacity:0; transition:.55s ease;
+}
+.testimonial.is-visible{ transform:none; opacity:1 }
+.testimonial p{ margin:0 0 12px; color:#485564 }
+.author{ display:flex; align-items:center; gap:10px }
+.author img{ width:44px; height:44px; border-radius:50%; object-fit:cover }
+
+/* ===== Contact ===== */
+.contact{ background:var(--gray-50); padding:54px 0 }
+.contact h2{ text-align:center; color:var(--blue-700); margin:0 0 10px }
+.contact .lead{ color:#5b6778 }
+
+/* ===== Footer ===== */
+.footer{ background:var(--blue-900); color:var(--white); padding:18px 0; text-align:center }
+
+/* ===== Animations ===== */
+.animate-in{ opacity:0; transform:translateY(-6px); animation:navFade .6s ease forwards; }
+.animate-in:nth-child(n){ animation-delay: calc( var(--i,0) * .07s ); }
+
+.fade-up{ opacity:0; transform:translateY(14px); }
+.fade-up.is-visible{ opacity:1; transform:none; transition:.7s ease }
+
+@keyframes navFade{ to{ opacity:1; transform:none } }
+
+/* ريسبونسب */
+@media (max-width:768px){
+  .nav-links{ gap:18px }
+}

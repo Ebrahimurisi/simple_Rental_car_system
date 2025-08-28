@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>تواصل معنا – معرض أبو حيد العولقي</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/pages.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container row">
+      <ul class="nav-links">
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="vehicles.html">المركبات</a></li>
+        <li><a href="booking.html">الحجوزات</a></li>
+        <li><a href="contact.html">تواصل معنا</a></li>
+      </ul>
+      <a class="btn-login" href="login.html">تسجيل دخول</a>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h1 class="section-title fade-up">تواصل معنا</h1>
+      <p class="lead fade-up">نسعد برسائلكم واستفساراتكم.</p>
+
+      <form class="form row-gap" onsubmit="event.preventDefault(); alert('وصلتنا رسالتك 👍'); this.reset();">
+        <input class="input" name="name" placeholder="الاسم" required />
+        <input class="input" name="email" type="email" placeholder="البريد الإلكتروني" required />
+        <textarea class="input" name="message" rows="5" placeholder="اكتب رسالتك" required></textarea>
+        <button class="btn">إرسال</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="container"><p>© 2024 معرض أبو حيد العولقي</p></div></footer>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
